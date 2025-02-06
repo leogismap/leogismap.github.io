@@ -22,7 +22,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Initialize the map
-        var map = L.map('map').setView([51.505, -0.09], 13); // Set center and zoom level
+        var map = L.map('map').setView([49.2537, -123.0033], 13); // Set center and zoom level
 
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -30,8 +30,14 @@
         }).addTo(map);
 
         // Add a marker to the map
-        L.marker([51.505, -0.09]).addTo(map)
-            .bindPopup("<b>Hello world!</b><br>I am a popup.")
+        L.marker([49.2537, -123.0033]).addTo(map)
+            .bindPopup("<b>British Columbia Institute of Technology</b><br>Canada,2018")
+            .openPopup();
+        L.marker([39.9062, 116.3879]).addTo(map)
+            .bindPopup("<b>University of Chinese Academy of Sciences</b><br>China,2002")
+            .openPopup();
+        L.marker([38.0336, 114.5173]).addTo(map)
+            .bindPopup("<b>Hebei Normal University</b><br>China,2002")
             .openPopup();
     </script>
 </body>
