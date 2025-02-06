@@ -384,28 +384,44 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+<!-- Google Maps JavaScript -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        // Center of the map (Midpoint between Canada and China)
+        var centerPoint = { lat: 45.0, lng: -100.0 }; 
 
-			<!-- Leaflet JavaScript -->
-		<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-		<script>
-		// Initialize the map and set view to a central location
-		var map = L.map('map').setView([49.2500, -123.0000], 10); // Centered between Canada & China
+        // Create the map
+        var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 3, 
+            center: centerPoint
+        });
 
-		// Add OpenStreetMap tile layer
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
+        // University Locations
+        var locations = [
+            { lat: 49.2537, lng: -123.0033, title: "British Columbia Institute of Technology" },
+            { lat: 39.9062, lng: 116.3879, title: "University of Chinese Academy of Sciences" },
+            { lat: 38.0336, lng: 114.5173, title: "Hebei Normal University" }
+        ];
 
-		// Add markers for each university
-		L.marker([49.2537, -123.0033]).addTo(map) // BCIT
-			.bindPopup("<b>British Columbia Institute of Technology</b><br>Canada").openPopup();
+        // Add markers for each location
+        locations.forEach(function (location) {
+            var marker = new google.maps.Marker({
+                position: { lat: location.lat, lng: location.lng },
+                map: map,
+                title: location.title
+            });
 
-		L.marker([39.9062, 116.3879]).addTo(map) // University of Chinese Academy of Sciences
-			.bindPopup("<b>University of Chinese Academy of Sciences</b><br>China");
+            var infoWindow = new google.maps.InfoWindow({
+                content: "<b>" + location.title + "</b>"
+            });
 
-		L.marker([38.0336, 114.5173]).addTo(map) // Hebei Normal University
-			.bindPopup("<b>Hebei Normal University</b><br>China");
-		</script>
+            marker.addListener("click", function () {
+                infoWindow.open(map, marker);
+            });
+        });
+    }
+</script>
 
 
 	</body>
