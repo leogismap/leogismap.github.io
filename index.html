@@ -16,12 +16,19 @@
 		<!-- Leaflet CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 		<style>
+
+			article {
+            height: 100vh; /* Ensures the article takes full height */
+            position: relative;
+        			}
     		/* Set map size */
-    		#map {
-        	height: 400px; /* Adjust height as needed */
-        	width: 100%;
-       		margin-top: 20px; /* Adds space above the map */
-    		}
+			#map {
+				height: 100vh;  /* Full height of the viewport */
+				width: 100%;    /* Full width */
+				position: absolute;  /* Optional: Covers full screen */
+				top: 0;
+				left: 0;
+				}
 		</style>
 
 	</head>
@@ -384,44 +391,43 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-<!-- Google Maps JavaScript -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-<script>
-    function initMap() {
-        // Center of the map (Midpoint between Canada and China)
-        var centerPoint = { lat: 45.0, lng: -100.0 }; 
-
-        // Create the map
-        var map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 3, 
-            center: centerPoint
-        });
-
-        // University Locations
-        var locations = [
-            { lat: 49.2537, lng: -123.0033, title: "British Columbia Institute of Technology" },
-            { lat: 39.9062, lng: 116.3879, title: "University of Chinese Academy of Sciences" },
-            { lat: 38.0336, lng: 114.5173, title: "Hebei Normal University" }
-        ];
-
-        // Add markers for each location
-        locations.forEach(function (location) {
-            var marker = new google.maps.Marker({
-                position: { lat: location.lat, lng: location.lng },
-                map: map,
-                title: location.title
-            });
-
-            var infoWindow = new google.maps.InfoWindow({
-                content: "<b>" + location.title + "</b>"
-            });
-
-            marker.addListener("click", function () {
-                infoWindow.open(map, marker);
-            });
-        });
-    }
-</script>
+			<script>
+				function initMap() {
+					var centerPoint = { lat: 45.0, lng: -100.0 }; // Adjust the center coordinates
+			
+					var map = new google.maps.Map(document.getElementById("map"), {
+						zoom: 3,
+						center: centerPoint,
+						mapTypeId: 'roadmap'
+					});
+			
+					var locations = [
+						{ lat: 49.2537, lng: -123.0033, title: "British Columbia Institute of Technology" },
+						{ lat: 39.9062, lng: 116.3879, title: "University of Chinese Academy of Sciences" },
+						{ lat: 38.0336, lng: 114.5173, title: "Hebei Normal University" }
+					];
+			
+					locations.forEach(function (location) {
+						var marker = new google.maps.Marker({
+							position: { lat: location.lat, lng: location.lng },
+							map: map,
+							title: location.title
+						});
+			
+						var infoWindow = new google.maps.InfoWindow({
+							content: "<b>" + location.title + "</b>"
+						});
+			
+						marker.addListener("click", function () {
+							infoWindow.open(map, marker);
+						});
+					});
+				}
+			</script>
+			
+			<!-- Load Google Maps API -->
+			<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+			
 
 
 	</body>
