@@ -41,43 +41,99 @@
     </style>
 </head>
 <body>
-    <h1>Leo Feng's Life Journey</h1>
+    <h1>Leo Feng's Professional Journey</h1>
     <div id="map"></div>
 
     <!-- Include Leaflet.js JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        // Define marker icon URLs
+        var redIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';  // Red for education
+        var greenIconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'; // Green for work experience
+        var blueIconUrl = 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'; // Blue for intern experience
+    
+        // Define custom icons
+        var redIcon = L.icon({
+            iconUrl: redIconUrl, 
+            iconSize: [32, 32], 
+            iconAnchor: [16, 32], 
+            popupAnchor: [0, -32] 
+        });
+    
+        var greenIcon = L.icon({
+            iconUrl: greenIconUrl, 
+            iconSize: [32, 32], 
+            iconAnchor: [16, 32], 
+            popupAnchor: [0, -32] 
+        });
+    
+        var blueIcon = L.icon({
+            iconUrl: blueIconUrl, 
+            iconSize: [32, 32], 
+            iconAnchor: [16, 32], 
+            popupAnchor: [0, -32] 
+        });
+    
         // Initialize the map
-        var map = L.map('map').setView([37.5, 0], 2); // Set center and zoom level
-
+        var map = L.map('map').setView([37.5, 0], 2);
+    
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        // Add markers with popups
-        L.marker([49.2537, -123.0033]).addTo(map)
-            .bindPopup("<b>Geographic Information System </b><br>British Columbia Institute of Technology | Canada, 2018");
-        L.marker([39.9062, 116.3879]).addTo(map)
+    
+        // Education markers (Red)
+        L.marker([49.2537, -123.0033], { icon: redIcon }).addTo(map)
+            .bindPopup("<b>Geographic Information System</b><br>British Columbia Institute of Technology | Canada, 2018");
+    
+        L.marker([39.89913683690045, 116.25731631614345], { icon: redIcon }).addTo(map)
             .bindPopup("<b>Environmental Science</b><br>University of Chinese Academy of Sciences | China, 2002");
-        L.marker([38.0336, 114.5173]).addTo(map)
+    
+        L.marker([38.0336, 114.5173], { icon: redIcon }).addTo(map)
             .bindPopup("<b>Geography</b><br>Hebei Normal University | China, 1998");
-
+    
+        // Working Experience markers (Green)
+        L.marker([38.0336, -78.5080], { icon: greenIcon }).addTo(map)
+            .bindPopup("<b>Geospatial Analyst</b><br>Facilities Management, University of Virginia | Charlottesville, VA | May 2023 – Present");
+    
+        L.marker([38.0293, -78.4767], { icon: greenIcon }).addTo(map)
+            .bindPopup("<b>GIS/Database Specialist</b><br>NAEVA GEOPHYSICS, INC. | Charlottesville, VA | July 2019 – May 2023");
+    
+        L.marker([44.3894, -79.6903], { icon: greenIcon }).addTo(map)
+            .bindPopup("<b>Field Data Collection Specialist</b><br>MOBIA Technology Innovations | Barrie, Ontario | Nov. 2018 – Jul. 2019");
+    
+        L.marker([39.878305237778676, 116.3604088493759], { icon: greenIcon }).addTo(map)
+            .bindPopup("<b>Senior Cartographer</b><br>SinoMaps Press | Beijing, China | Jul. 2002 – Jul. 2011");
+    
+        // Intern Experience markers (Blue)
+        L.marker([38.0293, -78.4767], { icon: blueIcon }).addTo(map)
+            .bindPopup("<b>GIS Specialist</b><br>Department of Community Development, County of Albemarle, VA | Jan. – Jun. 2018");
+    
+        L.marker([49.2827, -123.1207], { icon: blueIcon }).addTo(map)
+            .bindPopup("<b>Research Assistant</b><br>World Wildlife Fund | Vancouver, Canada | May – Jun. 2017");
+    
+        L.marker([49.2606, -123.2460], { icon: blueIcon }).addTo(map)
+            .bindPopup("<b>Research Assistant</b><br>Mineral Deposit Research Unit, University of British Columbia | Apr. – Jun. 2014");
+    
         // Create the Legend
         var legend = L.control({ position: 'bottomleft' });
-
+    
         legend.onAdd = function (map) {
-            var div = L.DomUtil.create('div', 'legend');  // Create div for the legend
+            var div = L.DomUtil.create('div', 'legend');  
             div.innerHTML = `
-                <div><span class="icon" style="background-color: red;"></span> BC Institute of Technology</div>
-                <div><span class="icon" style="background-color: blue;"></span> University of Chinese Academy of Sciences</div>
-                <div><span class="icon" style="background-color: green;"></span> Hebei Normal University</div>
+                <div><img src="${redIconUrl}" width="20" height="20" style="vertical-align: middle;"> Education</div>
+                <div><img src="${greenIconUrl}" width="20" height="20" style="vertical-align: middle;"> Working Experience</div>
+                <div><img src="${blueIconUrl}" width="20" height="20" style="vertical-align: middle;"> Intern Experience</div>
             `;
             return div;
         };
-
+    
         // Add the legend to the map
         legend.addTo(map);
     </script>
+    
+    
+    
+    
 </body>
 </html>
