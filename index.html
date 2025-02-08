@@ -3,226 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leo Feng's Professional Journey</title>
+    <title>Flask Map Example</title>
     <!-- Include Leaflet.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
     <!-- Style for the map container -->
     <style>
         #map {
-            height: 500px;
+            height: 400px;
             width: 100%;
-        }
-
-        /* Style for the legend */
-        .leaflet-control-layers {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            z-index: 9999;
-        }
-        .legend {
-            background-color: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            font-size: 14px;
-        }
-        .legend div {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-        .legend .icon {
-            width: 12px;
-            height: 12px;
-            margin-right: 5px;
-            border-radius: 50%;
         }
     </style>
 </head>
 <body>
-    <h1>Leo Feng's Professional Journey</h1>
+    <h1>Simple Web Map using Flask and Leaflet</h1>
     <div id="map"></div>
-    <div>
-        <h3 style="color: red;">Click the underlined text below to zoom in on the location on the map</h3>
-    </div>
-    <div>
-
-    <!-- Main -->
-        <div id="main">
-
-    
-                
-
-            <!-- Education -->
-            <article id="Education">
-                <h2 class="major">Education</h2>
-            
-                <li id="edu-bcit"><u style="color: palevioletred;">B.S., Geographic Information System(GIS) | British Columbia Institute of Technology | Canada, 2018</u></li>                       
-                <li>Advanced Diploma, Geographic Information System(GIS) | British Columbia Institute of Technology | Canada, 2014</li>
-                <li id="edu-ucas"><u style="color: palevioletred;">M.S., Environmental Science | University of Chinese Academy of Sciences | China, 2002</u></li>
-                <li id="edu-hebei"><u style="color: palevioletred;">B.S., Geography | Hebei Normal University | China, 1998</u></li>
-            </article>
-            <!-- Work -->
-                <article id="Work">
-                    <h2 class="major">Work</h2>
-                    <li id="work-uva"><u style="color: green;">Geospatial Analyst | Facilities Management, University of Virginia | Charlottesville, VA | May 2023– Present</u></li>
-                    <li id="work-naeva"><u style="color: green;">GIS/Database Specialist | NAEVA GEOPHYSICS, INC. | Charlottesville, VA | July 2019 – May 2023</u></li>
-                    <li id="work-mobia"><u style="color: green;">Field Data Collection Specialist | MOBIA Technology Innovations | Barrie, Ontario | Nov. 2018 – Jul. 2019</u></li>
-                    <li id="work-sinomaps"><u style="color: green;">Senior Cartographer | SinoMaps Press | Beijing, China | Jul. 2002– Jul. 2011</u></li>                    
-
-                    
-                </article>
-
-
-            <!-- Intern -->
-                <article id="Intern">
-                    <h2 class="major">Intern</h2>
-                    <li id="intern-albemarle"><u style="color: blue">GIS Specialist | Department of Community Development, County of Albemarle | Charlottesville, VA | Jan. – Jun. 2018</u></li>
-                    <li id="intern-wwf"><u style="color: blue">Research Assistant | World Wildlife Fund | Vancouver, Canada | May – Jun. 2017</u></li>
-                    <li id="intern-ubc"><u style="color: blue">Research Assistant | Mineral Deposit Research Unit, University of British Columbia | Apr. – Jun. 2014</u></li>
-
-
-                </article>
-
-                <article id="Career Summary">
-                    <h2 class="major">Career Summary</h2>
-                    <p>Over my career, I’ve had the chance to work in a variety of industries, including facility management in higher education, digital geophysical mapping, telecom infrastructure design, and map production and publishing. In every role, database management has been an essential part of my daily work, while GIS technology has been a key tool enabling me to achieve success and make meaningful contributions.</p>
-
-                    <p>Currently, as a geospatial analyst, I am responsible for geospatial data analysis, maintaining database information, and responding to customer requests for geospatial solutions.</p>
-            
-                    <p>In my previous role, I was a key player in managing GIS operations for over 10 digital geophysical mapping projects, ensuring their successful completion. My contributions were critical at every stage of these projects.</p>
-            
-                    <p>Additionally, as a field data collection specialist, I was responsible for planning and scheduling daily site activities, specifically collecting pole data related to existing telecom infrastructure.</p>
-            
-                    <p>Finally, I have nine years of experience as a cartographer, which provided me with a solid foundation in mapping projects and prepared me for success in my subsequent roles.</p>
-            
-                    <p>These experiences have equipped me with the ability to translate complex datasets into actionable insights, allowing me to provide effective geospatial solutions and drive project success.</p>
-                </article>
-               
-
-
-
-</div>
-
-<!-- BG -->
-<div id="bg"></div>
-
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
-    <!-- Style for Career Summary Section -->
-    <style>
-        #career-summary {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        #career-summary h2 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        #career-summary p {
-            text-align: justify;
-        }
-    </style>
-
 
     <!-- Include Leaflet.js JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-       // Define marker icon URLs
-var redIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';  // Red for education
-var greenIconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'; // Green for work
-var blueIconUrl = 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'; // Blue for intern
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13); // Set center and zoom level
 
-// Define custom icons
-var redIcon = L.icon({ iconUrl: redIconUrl, iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -32] });
-var greenIcon = L.icon({ iconUrl: greenIconUrl, iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -32] });
-var blueIcon = L.icon({ iconUrl: blueIconUrl, iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -32] });
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-// Initialize the map
-var map = L.map('map').setView([37.5, 0], 2);
-
-// Add OpenStreetMap tile layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-// Create an object to store markers
-var markers = {
-    // Education
-    "edu-bcit": L.marker([49.2537, -123.0033], { icon: redIcon }).addTo(map)
-        .bindPopup("<b>Geographic Information System</b><br>British Columbia Institute of Technology | Canada, 2018"),
-    "edu-ucas": L.marker([39.8991, 116.2573], { icon: redIcon }).addTo(map)
-        .bindPopup("<b>Environmental Science</b><br>University of Chinese Academy of Sciences | China, 2002"),
-    "edu-hebei": L.marker([38.0336, 114.5173], { icon: redIcon }).addTo(map)
-        .bindPopup("<b>Geography</b><br>Hebei Normal University | China, 1998"),
-
-    // Work
-    "work-uva": L.marker([38.0336, -78.5080], { icon: greenIcon }).addTo(map)
-        .bindPopup("<b>Geospatial Analyst</b><br>Facilities Management, University of Virginia | Charlottesville, VA | May 2023 – Present"),
-    "work-naeva": L.marker([38.0293, -78.4767], { icon: greenIcon }).addTo(map)
-        .bindPopup("<b>GIS/Database Specialist</b><br>NAEVA GEOPHYSICS, INC. | Charlottesville, VA | July 2019 – May 2023"),
-    "work-mobia": L.marker([44.3894, -79.6903], { icon: greenIcon }).addTo(map)
-        .bindPopup("<b>Field Data Collection Specialist</b><br>MOBIA Technology Innovations | Barrie, Ontario | Nov. 2018 – Jul. 2019"),
-    "work-sinomaps": L.marker([39.8783, 116.3604], { icon: greenIcon }).addTo(map)
-        .bindPopup("<b>Senior Cartographer</b><br>SinoMaps Press | Beijing, China | Jul. 2002 – Jul. 2011"),
-
-    // Intern
-    "intern-albemarle": L.marker([38.0293, -78.4767], { icon: blueIcon }).addTo(map)
-        .bindPopup("<b>GIS Specialist</b><br>Department of Community Development, County of Albemarle, VA | Jan. – Jun. 2018"),
-    "intern-wwf": L.marker([49.2827, -123.1207], { icon: blueIcon }).addTo(map)
-        .bindPopup("<b>Research Assistant</b><br>World Wildlife Fund | Vancouver, Canada | May – Jun. 2017"),
-    "intern-ubc": L.marker([49.2606, -123.2460], { icon: blueIcon }).addTo(map)
-        .bindPopup("<b>Research Assistant</b><br>Mineral Deposit Research Unit, University of British Columbia | Apr. – Jun. 2014")
-};
-
-// Function to add click event listeners
-function addClickEvent(id) {
-    document.getElementById(id).addEventListener("click", function() {
-        var marker = markers[id];
-        if (marker) {
-            map.setView(marker.getLatLng(), 12); // Zoom to marker
-            marker.openPopup(); // Open popup
-        }
-    });
-}
-
-// Add event listeners to all list items
-Object.keys(markers).forEach(addClickEvent);
-
-// Create the Legend
-var legend = L.control({ position: 'bottomleft' });
-
-legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'legend');  
-    div.innerHTML = `
-        <div><img src="${redIconUrl}" width="20" height="20" style="vertical-align: middle;"> Education</div>
-        <div><img src="${greenIconUrl}" width="20" height="20" style="vertical-align: middle;"> Work Experience</div>
-        <div><img src="${blueIconUrl}" width="20" height="20" style="vertical-align: middle;"> Intern Experience</div>
-    `;
-    return div;
-};
-
-// Add the legend to the map
-legend.addTo(map);
-
-
+        // Add a marker to the map
+        L.marker([51.505, -0.09]).addTo(map)
+            .bindPopup("<b>Hello world!</b><br>I am a popup.")
+            .openPopup();
     </script>
-    
-    
-    
-    
 </body>
 </html>
