@@ -58,7 +58,7 @@
             <!-- Education -->
             <article id="Education">
                 <h2 class="major">Education</h2>
-            
+                <li id="edu-uva"><u style="color: palevioletred;">Certificate, Business Analytics Science | University of Virginia | USA, 2026</u></li> 
                 <li id="edu-bcit"><u style="color: palevioletred;">B.S., Geographic Information System(GIS) | British Columbia Institute of Technology | Canada, 2018</u></li>                       
                 <li>Advanced Diploma, Geographic Information System(GIS) | British Columbia Institute of Technology | Canada, 2014</li>
                 <li id="edu-ucas"><u style="color: palevioletred;">M.S., Environmental Science | University of Chinese Academy of Sciences | China, 2002</u></li>
@@ -131,6 +131,8 @@
         // Create an object to store markers
         var markers = {
             // Education
+            "edu-uva": L.marker([38.04428863055159, -78.51182742129045], { icon: redIcon }).addTo(map)
+                .bindPopup("<b>Business Analytics Science</b><br>University of Virginia | USA, 2026"),
             "edu-bcit": L.marker([49.2537, -123.0033], { icon: redIcon }).addTo(map)
                 .bindPopup("<b>Geographic Information System</b><br>British Columbia Institute of Technology | Canada, 2018"),
             "edu-ucas": L.marker([39.8991, 116.2573], { icon: redIcon }).addTo(map)
